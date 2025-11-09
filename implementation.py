@@ -115,7 +115,7 @@ class FloatingPointEmulator:
         
         reconstructed = u_h.to_float() + u_l.to_float()
         print(f"\nReconstructed: {reconstructed:.15e}")
-        if value != 0 and value != float('inf') and value != -float('inf'):
+        if value != float('inf') and value != -float('inf'):
             print(f"Error: {abs(value - reconstructed):.3e}")
         print("=" * 48)
 
