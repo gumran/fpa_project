@@ -39,8 +39,8 @@ class E9S12: # 1 sign bit, 9 exponent bits (bias = 139), 12 significand bits, 5 
 class FloatingPointEmulator:
     # Convert float32 to bit representation   
     @staticmethod
-    def float32_to_bits(f: float) -> int:
-        return struct.unpack('>I', struct.pack('>f', np.float32(f)))[0]
+    def float32_to_bits(f) -> int:
+        return struct.unpack('>I', struct.pack('>f', f))[0]
     
     # Unpack FP32 into sign, exponent, significand, and flags
     @staticmethod
@@ -117,12 +117,10 @@ class FloatingPointEmulator:
         print(f"\nReconstructed: {reconstructed:.15e}")
         if value != 0 and value != float('inf') and value != -float('inf'):
             print(f"Error: {abs(value - reconstructed):.3e}")
-            if value != 0:
-                print(f"Relative error: {abs(value - reconstructed) / abs(value):.3e}")
         print("=" * 48)
 
 def main():
-    test_values = [
+    test_values = [np.float32(f) for f in [
             3.14159265358979,
             1.23456789e-5,
             9.87654321e8,
@@ -134,6 +132,7 @@ def main():
             float('nan'),
             1.2345e-40, # Subnormal
             -5.6789e-42, # Subnormal
+        ]
     ]
 
     for val in test_values:
