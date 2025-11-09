@@ -103,7 +103,7 @@ class FloatingPointEmulator:
         
     @staticmethod
     def demonstrate_decomposition(value: float):
-        print("=" * 64)
+        print("=" * 48)
         print(f"Original value: {value:.15e}")
         
         u_h, u_l = FloatingPointEmulator.fp32_to_e9s12_decomposition(value)
@@ -119,7 +119,7 @@ class FloatingPointEmulator:
             print(f"Error: {abs(value - reconstructed):.3e}")
             if value != 0:
                 print(f"Relative error: {abs(value - reconstructed) / abs(value):.3e}")
-        print("=" * 64)
+        print("=" * 48)
 
 def main():
     test_values = [
